@@ -40,6 +40,7 @@ const (
 	PASSWORD_MAXIMUM_LENGTH = 64
 	PASSWORD_MINIMUM_LENGTH = 5
 
+	SERVICE_UAA       = "uaa"
 	SERVICE_GITLAB    = "gitlab"
 	SERVICE_GOOGLE    = "google"
 	SERVICE_OFFICE365 = "office365"
@@ -2803,6 +2804,7 @@ type Config struct {
 	SupportSettings           SupportSettings
 	AnnouncementSettings      AnnouncementSettings
 	ThemeSettings             ThemeSettings
+	UaaSettings               SSOSettings
 	GitLabSettings            SSOSettings
 	GoogleSettings            SSOSettings
 	Office365Settings         Office365Settings
@@ -2841,6 +2843,8 @@ func (o *Config) ToJson() string {
 
 func (o *Config) GetSSOService(service string) *SSOSettings {
 	switch service {
+	case SERVICE_UAA:
+		return &o.UaaSettings
 	case SERVICE_GITLAB:
 		return &o.GitLabSettings
 	case SERVICE_GOOGLE:
@@ -2882,6 +2886,7 @@ func (o *Config) SetDefaults() {
 	o.EmailSettings.SetDefaults(isUpdate)
 	o.PrivacySettings.setDefaults()
 	o.Office365Settings.setDefaults()
+	o.UaaSettings.setDefaults("", "", "", "")
 	o.GitLabSettings.setDefaults("", "", "", "")
 	o.GoogleSettings.setDefaults(GOOGLE_SETTINGS_DEFAULT_SCOPE, GOOGLE_SETTINGS_DEFAULT_AUTH_ENDPOINT, GOOGLE_SETTINGS_DEFAULT_TOKEN_ENDPOINT, GOOGLE_SETTINGS_DEFAULT_USER_API_ENDPOINT)
 	o.ServiceSettings.SetDefaults(isUpdate)

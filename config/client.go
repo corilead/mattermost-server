@@ -235,6 +235,7 @@ func GenerateLimitedClientConfig(c *model.Config, telemetryID string, license *m
 	props["EmailLoginButtonBorderColor"] = *c.EmailSettings.LoginButtonBorderColor
 	props["EmailLoginButtonTextColor"] = *c.EmailSettings.LoginButtonTextColor
 
+	props["EnableSignUpWithUaa"] = strconv.FormatBool(*c.UaaSettings.Enable)
 	props["EnableSignUpWithGitLab"] = strconv.FormatBool(*c.GitLabSettings.Enable)
 
 	props["TermsOfServiceLink"] = *c.SupportSettings.TermsOfServiceLink

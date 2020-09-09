@@ -812,11 +812,13 @@ func (a *App) AuthorizeOAuthUser(w http.ResponseWriter, r *http.Request, service
 	p.Set("grant_type", model.ACCESS_TOKEN_GRANT_TYPE)
 	p.Set("redirect_uri", redirectUri)
 
-	req, requestErr := http.NewRequest("POST", *sso.TokenEndpoint, strings.NewReader(p.Encode()))
+	path := fmt.Sprintf("%s?grant_type=%s&client_id=%s&code=%s", *sso.TokenEndpoint, model.ACCESS_TOKEN_GRANT_TYPE, *sso.Id, code)
+	req, requestErr := http.NewRequest("POST", path, strings.NewReader(p.Encode()))
 	if requestErr != nil {
 		return nil, "", stateProps, model.NewAppError("AuthorizeOAuthUser", "api.user.authorize_oauth_user.token_failed.app_error", nil, requestErr.Error(), http.StatusInternalServerError)
 	}
 
+	req.SetBasicAuth(*sso.Id, *sso.Secret)
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set("Accept", "application/json")
 
