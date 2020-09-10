@@ -44,7 +44,7 @@ const (
 	AUTO_RESPONDER_ACTIVE_NOTIFY_PROP  = "auto_responder_active"
 	AUTO_RESPONDER_MESSAGE_NOTIFY_PROP = "auto_responder_message"
 
-	DEFAULT_LOCALE          = "en"
+	DEFAULT_LOCALE          = "zh-CN"
 	USER_AUTH_SERVICE_EMAIL = "email"
 
 	USER_EMAIL_MAX_LENGTH     = 128

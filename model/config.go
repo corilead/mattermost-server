@@ -102,13 +102,13 @@ const (
 	SERVICE_SETTINGS_DEFAULT_GFYCAT_API_KEY     = "2_KtH_W5"
 	SERVICE_SETTINGS_DEFAULT_GFYCAT_API_SECRET  = "3wLVZPiswc3DnaiaFoLkDvB4X0IV6CpMkj4tf2inJRsBY6-FnkT08zGmppWFgeof"
 
-	TEAM_SETTINGS_DEFAULT_SITE_NAME                = "Mattermost"
-	TEAM_SETTINGS_DEFAULT_MAX_USERS_PER_TEAM       = 50
+	TEAM_SETTINGS_DEFAULT_SITE_NAME                = "CPDM即时通讯"
+	TEAM_SETTINGS_DEFAULT_MAX_USERS_PER_TEAM       = 50000
 	TEAM_SETTINGS_DEFAULT_CUSTOM_BRAND_TEXT        = ""
 	TEAM_SETTINGS_DEFAULT_CUSTOM_DESCRIPTION_TEXT  = ""
 	TEAM_SETTINGS_DEFAULT_USER_STATUS_AWAY_TIMEOUT = 300
 
-	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "mmuser:mostest@tcp(localhost:3306)/mattermost_test?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
+	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "cplm_chat_user:cplm_chat_password@tcp(localhost:3306)/cplm_chat?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
 
 	FILE_SETTINGS_DEFAULT_DIRECTORY = "./data/"
 
@@ -516,7 +516,7 @@ func (s *ServiceSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.EnableChannelViewedMessages == nil {
-		s.EnableChannelViewedMessages = NewBool(true)
+		s.EnableChannelViewedMessages = NewBool(false)
 	}
 
 	if s.EnableUserStatuses == nil {
@@ -532,7 +532,7 @@ func (s *ServiceSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.EnableTutorial == nil {
-		s.EnableTutorial = NewBool(true)
+		s.EnableTutorial = NewBool(false)
 	}
 
 	// Must be manually enabled for existing installations.
@@ -577,11 +577,11 @@ func (s *ServiceSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.EnablePostUsernameOverride == nil {
-		s.EnablePostUsernameOverride = NewBool(false)
+		s.EnablePostUsernameOverride = NewBool(true)
 	}
 
 	if s.EnablePostIconOverride == nil {
-		s.EnablePostIconOverride = NewBool(false)
+		s.EnablePostIconOverride = NewBool(true)
 	}
 
 	if s.WebsocketPort == nil {
@@ -663,7 +663,7 @@ func (s *ServiceSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.ExperimentalEnableDefaultChannelLeaveJoinMessages == nil {
-		s.ExperimentalEnableDefaultChannelLeaveJoinMessages = NewBool(true)
+		s.ExperimentalEnableDefaultChannelLeaveJoinMessages = NewBool(false)
 	}
 
 	if s.ExperimentalGroupUnreadChannels == nil {
@@ -728,7 +728,7 @@ func (s *ServiceSettings) SetDefaults(isUpdate bool) {
 	}
 
 	if s.EnableBotAccountCreation == nil {
-		s.EnableBotAccountCreation = NewBool(false)
+		s.EnableBotAccountCreation = NewBool(true)
 	}
 
 	if s.EnableSVGs == nil {
@@ -1761,7 +1761,7 @@ func (s *TeamSettings) SetDefaults() {
 	}
 
 	if s.DEPRECATED_DO_NOT_USE_EnableTeamCreation == nil {
-		s.DEPRECATED_DO_NOT_USE_EnableTeamCreation = NewBool(true)
+		s.DEPRECATED_DO_NOT_USE_EnableTeamCreation = NewBool(false)
 	}
 
 	if s.EnableUserCreation == nil {
@@ -1850,7 +1850,7 @@ func (s *TeamSettings) SetDefaults() {
 	}
 
 	if s.MaxChannelsPerTeam == nil {
-		s.MaxChannelsPerTeam = NewInt64(2000)
+		s.MaxChannelsPerTeam = NewInt64(200000)
 	}
 
 	if s.MaxNotificationsPerChannel == nil {
@@ -2131,7 +2131,7 @@ func (s *LocalizationSettings) SetDefaults() {
 	}
 
 	if s.AvailableLocales == nil {
-		s.AvailableLocales = NewString("")
+		s.AvailableLocales = NewString(DEFAULT_LOCALE)
 	}
 }
 
@@ -2549,7 +2549,7 @@ func (s *PluginSettings) SetDefaults(ls LogSettings) {
 	}
 
 	if s.EnableUploads == nil {
-		s.EnableUploads = NewBool(false)
+		s.EnableUploads = NewBool(true)
 	}
 
 	if s.AllowInsecureDownloadUrl == nil {
@@ -2874,7 +2874,7 @@ func (o *Config) SetDefaults() {
 	o.SamlSettings.SetDefaults()
 
 	if o.TeamSettings.TeammateNameDisplay == nil {
-		o.TeamSettings.TeammateNameDisplay = NewString(SHOW_USERNAME)
+		o.TeamSettings.TeammateNameDisplay = NewString(SHOW_NICKNAME_FULLNAME)
 
 		if *o.SamlSettings.Enable || *o.LdapSettings.Enable {
 			*o.TeamSettings.TeammateNameDisplay = SHOW_FULLNAME
