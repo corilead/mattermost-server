@@ -6887,11 +6887,11 @@
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support_version",
-        "translation": "您的浏览器不再被 Mattermost 支持"
+        "translation": "您的浏览器不再被支持"
     },
     {
         "id": "web.error.unsupported_browser.no_longer_support",
-        "translation": "Mattermost 不再支持此浏览器"
+        "translation": "不再支持此浏览器"
     },
     {
         "id": "web.error.unsupported_browser.min_os_version.windows",
