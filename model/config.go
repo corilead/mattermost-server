@@ -108,7 +108,7 @@ const (
 	TEAM_SETTINGS_DEFAULT_CUSTOM_DESCRIPTION_TEXT  = ""
 	TEAM_SETTINGS_DEFAULT_USER_STATUS_AWAY_TIMEOUT = 300
 
-	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "cplm_chat_user:cplm_chat_password@tcp(localhost:3306)/cplm_chat?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
+	SQL_SETTINGS_DEFAULT_DATA_SOURCE = "mmuser:mostest@tcp(localhost:3306)/mattermost_test?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s"
 
 	FILE_SETTINGS_DEFAULT_DIRECTORY = "./data/"
 
