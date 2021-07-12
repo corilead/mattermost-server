@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
-	"strconv"
 	"strings"
 
 	"github.com/mattermost/mattermost-server/v5/einterfaces"
@@ -18,7 +17,7 @@ type GitLabProvider struct {
 }
 
 type GitLabUser struct {
-	Id       int64  `json:"id"`
+	Id       string  `json:"id"`
 	Username string `json:"username"`
 	Login    string `json:"login"`
 	Email    string `json:"email"`
@@ -75,7 +74,7 @@ func (glu *GitLabUser) ToJson() string {
 }
 
 func (glu *GitLabUser) IsValid() error {
-	if glu.Id == 0 {
+	if glu.Id == "" {
 		return errors.New("user id can't be 0")
 	}
 
@@ -87,7 +86,7 @@ func (glu *GitLabUser) IsValid() error {
 }
 
 func (glu *GitLabUser) getAuthData() string {
-	return strconv.FormatInt(glu.Id, 10)
+	return glu.Id
 }
 
 func (m *GitLabProvider) GetUserFromJson(data io.Reader, tokenUser *model.User) (*model.User, error) {
